@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast | Pro Weather Station</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="loader-container" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-cloud-bolt"></i> SkyCast</div>
+
+        <ul class="nav-links">
+            <li><a href="#" class="active">Ana Sayfa</a></li>
+            <li><a href="#" id="openAbout">Hakkımda</a></li>
+        </ul>
+
+        <div class="system-info">
+            <div class="date-badge">
+                <i class="fa-regular fa-calendar-days"></i>
+                <span id="canliTarih">Yükleniyor...</span>
+            </div>
+            <div class="clock" id="canliSaat">00:00:00</div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content-left">
+            <h1>Gökyüzünü <br><span>Yeniden Keşfet</span></h1>
+            <p>Sadece hava durumunu değil, atmosferin ritmini yakala. Anlık veriler ve akıllı tahminlerle her anını planla.</p>
+
+            <div class="quick-links">
+                <div class="tags">
+                    <button onclick="sehirSec('Istanbul')"><i class="fa-solid fa-location-dot"></i> İstanbul</button>
+                    <button onclick="sehirSec('Ankara')"><i class="fa-solid fa-location-dot"></i> Ankara</button>
+                    <button onclick="sehirSec('Izmir')"><i class="fa-solid fa-location-dot"></i> İzmir</button>
+                    <button onclick="sehirSec('Adana')"><i class="fa-solid fa-location-dot"></i> Adana</button>
+                    <button onclick="sehirSec('Antalya')"><i class="fa-solid fa-location-dot"></i> Antalya</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-right">
+            <div class="card">
+                <div class="search">
+                    <input type="text" id="sehirInput" placeholder="Şehir Ara...">
+                    <button id="araBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="konumBtn" class="location-btn"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
+
+                <div class="weather" style="display: none;">
+
+                    <div class="icon-container">
+                        <i class="weather-icon fa-solid fa-cloud"></i>
+                    </div>
+
+                    <h1 id="derece">0°C</h1>
+                    <h2 id="sehirAdi">Şehir</h2>
+                    <p id="durum">Durum</p>
+                    <div class="divider"></div>
+
+                    <div class="details-grid">
+                        <div class="detail-box">
+                            <i class="fa-solid fa-droplet"></i>
+                            <div>
+                                <p class="degeryazi" id="nem">%0</p>
+                                <p>Nem</p>
+                            </div>
+                        </div>
+                        <div class="detail-box">
+                            <i class="fa-solid fa-wind"></i>
+                            <div>
+                                <p class="degeryazi" id="ruzgar">0 km/s</p>
+                                <p>Rüzgar</p>
+                            </div>
+                        </div>
+                        <div class="detail-box">
+                            <i class="fa-solid fa-temperature-half"></i>
+                            <div>
+                                <p class="degeryazi" id="hissedilen">0°C</p>
+                                <p>Hissedilen</p>
+                            </div>
+                        </div>
+                        <div class="detail-box" id="aqiKutu">
+                            <i class="fa-solid fa-lungs"></i>
+                            <div>
+                                <p class="degeryazi" id="aqiDurum">-</p>
+                                <p>Hava Kalitesi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="sicaklikGrafigi"></canvas>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="forecast-title">5 Günlük Tahmin</h3>
+                    <div class="daily-forecast" id="gunlukTahmin"></div>
+                </div>
+
+                <div id="hataMesaji" style="display: none;">
+                    <i class="fa-solid fa-circle-exclamation"></i> Şehir bulunamadı!
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+
+            <div class="profile-container">
+                <div class="profile-glow">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+            </div>
+
+            <h2 class="dev-title">Merhaba, Ben <span class="gradient-text">Halil Işık</span></h2>
+            <p class="dev-subtitle">Bilgisayar Mühendisliği Öğrencisi 💻</p>
+
+            <p class="dev-desc">
+                Teknolojiyi estetikle buluşturmayı seviyorum. <b>SkyCast</b>, karmaşık meteorolojik verileri; modern tasarım ve akıllı algoritmalarla birleştirerek kullanıcıya sunan bir vizyon projesidir.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="tech-stack">
+                <span class="tech-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
+                <span class="tech-badge"><i class="fa-solid fa-cloud"></i> API</span>
+                <span class="tech-badge"><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+                <span class="tech-badge"><i class="fa-solid fa-layer-group"></i> Glassmorphism</span>
+            </div>
+
+            <div class="modal-socials">
+                <a href="https://www.linkedin.com/in/halil-işık-b0a86522a" target="_blank" class="social-btn linkedin">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/halilceng" target="_blank" class="social-btn github">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="mailto:halil.isik990@gmail.com" class="social-btn email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Designed & Developed by <span style="color: #4facfe; font-weight: 600;">Halil Işık</span> | © 2026</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
