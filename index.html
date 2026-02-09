@@ -1231,6 +1231,12 @@
         const savedCity = localStorage.getItem('lastCity');
         checkWeather(savedCity || "Istanbul"); // Eğer kayıtlı yoksa İstanbul'u aç
     </script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+        }
+    </script>
+
 </body>
 
 </html>

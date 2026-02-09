@@ -1,10 +1,12 @@
 {
-    "name": "SkyCast Weather",
+    "name": "SkyCast",
     "short_name": "SkyCast",
-    "start_url": "/index.html",
+    "description": "Modern ve interaktif hava durumu uygulaması",
+    "start_url": ".",
     "display": "standalone",
-    "background_color": "#1e1e24",
+    "background_color": "#0f172a",
     "theme_color": "#4facfe",
+    "orientation": "portrait",
     "icons": [{
             "src": "https://cdn-icons-png.flaticon.com/512/1163/1163661.png",
             "sizes": "192x192",
