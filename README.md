@@ -2,10 +2,9 @@
 
 SkyCast, modern web teknolojileri ve **Glassmorphism** tasarım dili kullanılarak geliştirilmiş, yeni nesil bir hava durumu takip uygulamasıdır.
 
-🔗 **Canlı Demo:** [Buraya Vercel Linkini Yapıştır]
+🔗 **Canlı Demo:** [https://skycast-weather-seven.vercel.app/](https://skycast-weather-seven.vercel.app/)
 
-![Proje Önizlemesi](https://images.unsplash.com/photo-1592210454359-9043f53db363?q=80&w=1200)
-
+[![Proje Önizlemesi](https://images.unsplash.com/photo-1592210454359-9043f53db363?q=80&w=1200)](https://skycast-weather-seven.vercel.app/)
 ## 🚀 Özellikler
 
 * **Anlık Veri:** OpenWeatherMap API ile global hava durumu takibi.
