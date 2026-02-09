@@ -24,7 +24,7 @@ SkyCast, modern web teknolojileri ve **Glassmorphism** tasarım dili kullanılar
 ## 👨‍💻 Geliştirici
 
 **Halil Işık** - Bilgisayar Mühendisliği Öğrencisi
-* [LinkedIn Profilim](www.linkedin.com/in/halil-işık-b0a86522a)
+* [LinkedIn Profilim](https://www.linkedin.com/in/halil-i%C5%9F%C4%B1k-b0a86522a/)
 * [GitHub Profilim](https://github.com/halilceng)
 
 ---
