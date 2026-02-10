@@ -670,3 +670,51 @@ footer {
         opacity: 1;
     }
 }
+
+
+/* =====================
+   MOBILE FIX (≤768px)
+===================== */
+
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+    /* Ana kartlar */
+    .card,
+    .weather-card,
+    .air-quality {
+        width: 100%;
+        border-radius: 16px;
+        padding: 14px;
+    }
+    /* Saatlik tahmin */
+    .hourly-forecast {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    .hour {
+        min-width: 90px;
+        padding: 10px;
+        font-size: 13px;
+    }
+    /* Grafik */
+    canvas {
+        max-height: 180px !important;
+    }
+    /* Başlıklar */
+    h1,
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 15px;
+    }
+    /* Footer */
+    footer {
+        font-size: 12px;
+        padding: 12px 0;
+    }
+}
