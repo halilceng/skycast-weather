@@ -47,7 +47,6 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         }
-        /* Masaüstünde tek ekran, scroll yok */
         
         body {
             background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80');
@@ -833,79 +832,72 @@
                 opacity: 1;
             }
         }
-        /* --- 📱 MOBİL UYUMLULUK FIX (BURASI EKLENDİ VE GÜÇLENDİRİLDİ) --- */
+        /* --- 📱 GÜÇLENDİRİLMİŞ MOBİL ENTEGRASYON (YENİLENMİŞ) --- */
         
         @media only screen and (max-width: 900px) {
-            /* 1. SCROLL VE YÜKSEKLİK KİLİDİNİ KIR (!important) */
+            /* GÖVDE: SCROLL AÇILDI VE YÜKSEKLİK SERBEST */
             body {
                 height: auto !important;
                 min-height: 100vh !important;
                 overflow-y: auto !important;
-                /* Kaydırmaya izin ver */
-                overflow-x: hidden !important;
-                /* Yan taşmayı engelle */
                 display: block !important;
-                /* Flex'i iptal et */
+                /* Flex iptal, blok düzen */
                 padding-bottom: 80px !important;
-                /* Footer için yer aç */
             }
-            /* 2. İÇERİĞİ ALT ALTA SIRALA */
-            .container {
-                display: flex !important;
-                flex-direction: column !important;
-                padding: 15px !important;
-                gap: 30px !important;
-                margin-top: 10px !important;
-                height: auto !important;
-            }
-            /* 3. NAVBAR'I DÜZELT */
+            /* NAVBAR: DİKEY VE SABİT DEĞİL */
             .navbar {
-                position: relative !important;
-                /* Yapışkan olmasın, aksın */
                 flex-direction: column !important;
-                gap: 15px !important;
+                position: relative !important;
+                /* Ekranı kaplamasın */
                 padding: 15px !important;
                 background: rgba(0, 0, 0, 0.85) !important;
+                gap: 15px !important;
             }
             .nav-links {
                 display: none !important;
             }
-            /* 4. YAZILARI KÜÇÜLT VE ORTALA */
+            /* ANA ALAN: YUKARIDAN BAŞLAT (ORTALAMA YOK) */
+            .container {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                /* ANAHTAR KOD BURASI: En tepeden başlat */
+                align-items: center !important;
+                padding: 20px 15px !important;
+                gap: 20px !important;
+                margin-top: 0 !important;
+                height: auto !important;
+            }
+            /* SOL İÇERİK */
             .content-left {
-                width: 100% !important;
                 text-align: center !important;
-                margin-bottom: 20px !important;
+                width: 100% !important;
+                margin-bottom: 10px !important;
             }
             .content-left h1 {
                 font-size: 42px !important;
                 margin-bottom: 10px !important;
             }
-            .content-left p {
-                font-size: 16px !important;
-            }
             .tags {
                 justify-content: center !important;
             }
-            /* 5. KARTI EKRANA SIĞDIR (TAŞMAYI ÖNLE) */
+            /* KART: EKRANA SIĞDIR VE TAŞMAYI ÖNLE */
             .card {
-                width: 95% !important;
-                /* Ekranın %95'i */
+                width: 100% !important;
                 max-width: 400px !important;
-                /* Asla 400px'i geçme */
+                /* Telefondan geniş olamaz */
                 margin: 0 auto !important;
-                /* Ortala */
                 padding: 20px !important;
                 max-height: none !important;
-                /* İçerik uzarsa uzasın */
-                margin-bottom: 30px !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
             }
-            /* 6. FOOTER'I ORTALA */
+            /* FOOTER */
             footer {
                 position: fixed !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
-                width: 90% !important;
                 bottom: 15px !important;
+                width: 90% !important;
                 justify-content: center !important;
             }
         }
