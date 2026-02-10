@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL) --- */
+        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL - DOKUNULMADI) --- */
         
         * {
             margin: 0;
@@ -24,7 +24,6 @@
             box-sizing: border-box;
             font-family: 'Outfit', sans-serif;
         }
-        /* Scrollbar */
         
          ::-webkit-scrollbar {
             width: 6px;
@@ -48,6 +47,7 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         }
+        /* Masaüstünde tek ekran, scroll yok */
         
         body {
             background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80');
@@ -833,95 +833,80 @@
                 opacity: 1;
             }
         }
-        /* --- 📱 GÜÇLENDİRİLMİŞ MOBİL ENTEGRASYON (BURASI GÜNCELLENDİ) --- */
+        /* --- 📱 MOBİL UYUMLULUK FIX (BURASI EKLENDİ VE GÜÇLENDİRİLDİ) --- */
         
         @media only screen and (max-width: 900px) {
-            /* Gövde: Scroll serbest bırakılsın */
+            /* 1. SCROLL VE YÜKSEKLİK KİLİDİNİ KIR (!important) */
             body {
                 height: auto !important;
                 min-height: 100vh !important;
                 overflow-y: auto !important;
+                /* Kaydırmaya izin ver */
                 overflow-x: hidden !important;
-                padding-bottom: 80px !important;
+                /* Yan taşmayı engelle */
                 display: block !important;
-                /* Flex'i kaldırıp blok yapıyoruz */
+                /* Flex'i iptal et */
+                padding-bottom: 80px !important;
+                /* Footer için yer aç */
             }
-            /* Container: Alt alta dizilsin */
+            /* 2. İÇERİĞİ ALT ALTA SIRALA */
             .container {
                 display: flex !important;
                 flex-direction: column !important;
-                /* Alt alta zorla */
-                padding: 10px 20px !important;
-                gap: 20px !important;
+                padding: 15px !important;
+                gap: 30px !important;
                 margin-top: 10px !important;
-                width: 100% !important;
                 height: auto !important;
-                justify-content: flex-start !important;
             }
-            /* Navbar: Dikey hizala */
+            /* 3. NAVBAR'I DÜZELT */
             .navbar {
+                position: relative !important;
+                /* Yapışkan olmasın, aksın */
                 flex-direction: column !important;
                 gap: 15px !important;
                 padding: 15px !important;
-                background: rgba(0, 0, 0, 0.8) !important;
-                position: relative !important;
-                /* Sticky yerine relative olsun mobilde */
+                background: rgba(0, 0, 0, 0.85) !important;
             }
             .nav-links {
                 display: none !important;
             }
-            /* Sol İçerik: Yazıları küçült ve ortala */
+            /* 4. YAZILARI KÜÇÜLT VE ORTALA */
             .content-left {
-                text-align: center !important;
                 width: 100% !important;
-                margin-bottom: 10px !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
             }
             .content-left h1 {
-                font-size: 40px !important;
-                /* Çok daha küçük */
+                font-size: 42px !important;
                 margin-bottom: 10px !important;
             }
             .content-left p {
-                font-size: 15px !important;
-                margin-bottom: 15px !important;
+                font-size: 16px !important;
             }
             .tags {
                 justify-content: center !important;
             }
-            /* --- KART DÜZELTMESİ (KRİTİK NOKTA) --- */
-            .content-right {
-                width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-            }
+            /* 5. KARTI EKRANA SIĞDIR (TAŞMAYI ÖNLE) */
             .card {
-                width: 100% !important;
-                /* Genişliği %100 yap */
-                max-width: 100% !important;
-                /* Sınırı kaldır */
-                min-width: 0 !important;
-                /* Minimum genişliği sıfırla */
-                margin: 0 !important;
+                width: 95% !important;
+                /* Ekranın %95'i */
+                max-width: 400px !important;
+                /* Asla 400px'i geçme */
+                margin: 0 auto !important;
+                /* Ortala */
                 padding: 20px !important;
-                border-radius: 20px !important;
-                box-sizing: border-box !important;
                 max-height: none !important;
-                /* Yükseklik sınırını kaldır */
-                overflow: visible !important;
-                /* İç kaydırmayı kapat */
+                /* İçerik uzarsa uzasın */
+                margin-bottom: 30px !important;
             }
-            /* Footer: Ortala */
+            /* 6. FOOTER'I ORTALA */
             footer {
                 position: fixed !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 width: 90% !important;
-                bottom: 10px !important;
+                bottom: 15px !important;
                 justify-content: center !important;
-                white-space: nowrap !important;
-            }
-            footer:hover {
-                transform: translateX(-50%) translateY(-3px) !important;
             }
         }
     </style>
@@ -1232,7 +1217,7 @@
             if (e.key === "Enter") checkWeather(searchBox.value);
         });
 
-        // --- 📍 KONUM ALMA (GPS) ÖZELLİĞİ ---
+        // --- 📍 KONUM ALMA (GPS) ---
         locationBtn.addEventListener("click", () => {
             if (navigator.geolocation) {
                 loader.style.display = "flex";
