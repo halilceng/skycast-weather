@@ -14,22 +14,22 @@
 
 /* Scrollbar Tasarımı */
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 8px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     transition: background 0.3s;
 }
 
-::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
 }
 
@@ -60,7 +60,6 @@ body::before {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* Karartma oranı */
     z-index: -1;
 }
 
@@ -109,7 +108,7 @@ body::before {
 }
 
 
-/* Sistem Bilgisi (Tarih ve Saat) */
+/* Sistem Bilgisi */
 
 .system-info {
     display: flex;
@@ -294,8 +293,6 @@ body::before {
 .weather-icon {
     font-size: 80px;
     color: #fff;
-    /* Gerekirse buraya bir gölge efekti eklenebilir */
-    /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); */
 }
 
 .weather h1 {
@@ -318,7 +315,7 @@ body::before {
 }
 
 
-/* Ayırıcı Çizgi */
+/* Ayırıcı */
 
 .divider {
     height: 1px;
@@ -367,7 +364,7 @@ body::before {
 }
 
 
-/* Hava Kalitesi Kutusu İçin Özel Renkler */
+/* Hava Kalitesi Renkleri */
 
 .aqi-iyi i {
     color: #00e676;
@@ -564,23 +561,23 @@ footer b {
 /* -------------------------------------------------- */
 
 @media (max-width: 768px) {
-    /* Navbar Düzeni */
+    /* Navbar Düzeni: Logoyu ve bilgileri alt alta al */
     .navbar {
         flex-direction: column;
         gap: 15px;
         padding: 15px 20px;
     }
+    /* Mobilde menü linklerini gizle */
     .nav-links {
         display: none;
-        /* Mobilde menü linklerini gizle (istenirse hamburger menü yapılabilir) */
     }
-    /* Ana Konteyner Düzeni */
+    /* Ana Konteyner: İçerikleri alt alta sırala */
     .container {
         flex-direction: column;
         padding: 30px 20px;
         gap: 40px;
     }
-    /* Sol İçerik (Başlık ve Butonlar) */
+    /* Sol İçerik: Ortala ve başlığı küçült */
     .content-left {
         max-width: 100%;
         text-align: center;
@@ -596,51 +593,26 @@ footer b {
         justify-content: center;
         /* Butonları ortala */
     }
-    .tags button {
-        padding: 8px 16px;
-        /* Butonları biraz küçült */
-        font-size: 13px;
-    }
-    /* Sağ İçerik (Hava Durumu Kartı) */
+    /* Sağ İçerik (Kart): Tam genişlik yap */
     .content-right {
         flex: auto;
         width: 100%;
     }
     .card {
         max-height: none;
-        /* Kartın yüksekliğini içeriğe göre serbest bırak */
+        /* Yükseklik sınırını kaldır */
         padding: 20px;
     }
-    .weather-icon {
-        font-size: 60px;
-    }
-    .weather h1 {
-        font-size: 40px;
-    }
-    /* Detaylar Izgarası */
-    .details-grid {
-        gap: 10px;
-    }
-    .detail-box {
-        padding: 10px;
-    }
-    .detail-box i {
-        font-size: 20px;
-    }
-    .degeryazi {
-        font-size: 16px;
-    }
-    /* 5 Günlük Tahmin (Liste Görünümü) */
+    /* 5 Günlük Tahmin: Kartları alt alta listele */
     .daily-forecast {
         flex-direction: column;
-        /* Yan yana yerine alt alta */
         gap: 10px;
     }
     .day-card {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 20px;
+        padding: 15px 20px;
         text-align: left;
     }
     .day-card:hover {
@@ -659,9 +631,5 @@ footer b {
     .day-temp {
         flex: 1;
         text-align: right;
-    }
-    /* Grafik mobilde çok küçük kalırsa gizlenebilir veya boyutu ayarlanabilir */
-    .chart-container {
-        height: 150px;
     }
 }
