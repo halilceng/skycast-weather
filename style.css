@@ -1,10 +1,17 @@
-/* --- GENEL AYARLAR --- */
+/* =========================
+   SKYCAST – FINAL STYLE.CSS
+   Mobile + Desktop FIXED
+========================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -12,899 +19,202 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     color: #fff;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: background-image 0.5s ease;
 }
 
 
-/* Arka planı biraz daha karartarak öndeki camı parlatıyoruz */
+/* =========================
+   HEADER / NAVBAR
+========================= */
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+header {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    padding: 20px 40px;
 }
 
-
-/* Loader */
-
-.loader-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(255, 255, 255, 0.1);
-    border-top: 4px solid #00f2fe;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    box-shadow: 0 0 20px #00f2fe;
-}
-
-
-/* --- NAVBAR (ÜST MENÜ) --- */
-
-.navbar {
+nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    justify-content: space-between;
 }
 
 .logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
-    transition: 0.4s;
+    font-size: 26px;
+    font-weight: 700;
 }
 
-.logo i {
-    color: #4facfe;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-    text-shadow: 0 0 30px rgba(79, 172, 254, 1);
-}
-
-.nav-links {
+nav ul {
     list-style: none;
     display: flex;
-    gap: 40px;
+    gap: 24px;
 }
 
-.nav-links a {
+nav ul li a {
     text-decoration: none;
-    color: #ccc;
-    font-weight: 600;
-    font-size: 16px;
-    transition: 0.3s;
-    position: relative;
-    padding: 5px 0;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
     color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background: #00f2fe;
-    transition: 0.3s;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px #00f2fe;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
+    opacity: 0.85;
 }
 
 
-/* --- 🔥 YENİ: PARLAYAN TARİH VE SAAT 🔥 --- */
-
-.system-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.date-badge,
-.clock {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 14px;
-    color: #ddd;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-    cursor: default;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Yaylanma efekti */
-}
-
-.clock {
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
-
-
-/* HOVER EFEKTLERİ (NEON GLOW) */
-
-.date-badge:hover,
-.clock:hover {
-    background: rgba(79, 172, 254, 0.2);
-    border-color: #00f2fe;
-    color: #fff;
-    transform: scale(1.1);
-    /* Biraz büyüt */
-    box-shadow: 0 0 20px rgba(79, 172, 254, 0.6), 0 0 40px rgba(0, 242, 254, 0.3);
-    /* Çift katmanlı parlama */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-.date-badge i {
-    color: #4facfe;
-    transition: 0.3s;
-}
-
-.date-badge:hover i {
-    color: #fff;
-    transform: rotate(15deg) scale(1.2);
-}
-
-
-/* --- ANA DÜZEN --- */
+/* =========================
+   MAIN CONTAINER
+========================= */
 
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 60px;
-    padding: 0 50px;
-    flex: 1;
+    padding: 60px 50px;
 }
 
 .content-left {
-    max-width: 550px;
-    animation: slideIn 1s ease;
+    max-width: 500px;
 }
 
 .content-left h1 {
-    font-size: 72px;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 25px;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.content-left h1 span {
-    background: linear-gradient(90deg, #4facfe, #00f2fe);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 25px rgba(79, 172, 254, 0.4));
+    font-size: 52px;
+    margin-bottom: 16px;
 }
 
 .content-left p {
-    font-size: 18px;
-    color: #e0e0e0;
-    margin-bottom: 35px;
-    line-height: 1.6;
-    max-width: 90%;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-
-/* Şehir Butonları */
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.tags button {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ccc;
-    padding: 12px 24px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.3s;
-    backdrop-filter: blur(5px);
-}
-
-.tags button i {
-    margin-right: 8px;
-    color: #4facfe;
-}
-
-.tags button:hover {
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.8), rgba(0, 242, 254, 0.8));
-    color: #fff;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
-    border-color: transparent;
-}
-
-.tags button:hover i {
-    color: #fff;
-}
-
-
-/* --- KART (Ultra Glass) --- */
-
-.card {
-    background: rgba(20, 20, 25, 0.6);
-    /* Daha şeffaf */
-    backdrop-filter: blur(30px) saturate(180%);
-    /* Daha güçlü bulanıklık */
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    padding: 30px;
-    border-radius: 30px;
-    width: 460px;
-    max-height: 85vh;
-    overflow-y: auto;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
-    animation: floatCard 6s ease-in-out infinite;
-    /* Hafif süzülme efekti */
-}
-
-@keyframes floatCard {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.card::-webkit-scrollbar {
-    width: 5px;
-}
-
-.card::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-}
-
-
-/* Arama Çubuğu */
-
-.search {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-
-.search input {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 16px 20px;
-    color: #fff;
     font-size: 16px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.search input:focus {
-    border-color: #4facfe;
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.search button {
-    width: 54px;
-    height: 54px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 18px;
-}
-
-.search button:hover {
-    background: #4facfe;
-    transform: scale(1.05);
-    border-color: transparent;
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
-}
-
-.location-btn {
-    background: linear-gradient(135deg, #ff4757, #ff6b81) !important;
-    border: none !important;
-}
-
-.location-btn:hover {
-    box-shadow: 0 0 15px rgba(255, 71, 87, 0.5) !important;
+    opacity: 0.85;
+    line-height: 1.6;
 }
 
 
-/* Hava Durumu İçerik */
+/* =========================
+   SEARCH BAR
+========================= */
 
-.weather {
-    text-align: center;
-}
-
-.icon-container {
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
-}
-
-.weather-icon {
-    font-size: 90px;
-    color: #fff;
-}
-
-.weather h1 {
-    font-size: 55px;
-    font-weight: 700;
-    margin: 10px 0;
-    letter-spacing: -2px;
-}
-
-.weather h2 {
-    font-size: 22px;
-    font-weight: 500;
-    color: #ddd;
-    margin-bottom: 5px;
-}
-
-.weather p {
-    font-size: 14px;
-    color: #aaa;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    margin: 25px 0;
-}
-
-
-/* Detay Kutuları */
-
-.details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.detail-box {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 18px;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
-}
-
-.detail-box:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.detail-box i {
-    font-size: 22px;
-    color: #4facfe;
-}
-
-
-/* Saatlik Tahmin */
-
-.hourly-container {
+.search-bar {
     display: flex;
     gap: 10px;
-    overflow-x: auto;
-    padding: 10px 5px;
-    margin-bottom: 20px;
-}
-
-.hourly-card {
-    min-width: 75px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
-    padding: 12px 5px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
-}
-
-.hourly-card:hover {
-    background: #4facfe;
-    border-color: #4facfe;
-    transform: scale(1.05);
-}
-
-.hourly-time {
-    font-size: 12px;
-    color: #ccc;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.hourly-card:hover .hourly-time,
-.hourly-card:hover .hourly-temp {
-    color: #fff;
-}
-
-
-/* Grafik */
-
-.chart-container {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
     margin-top: 20px;
 }
 
-
-/* 5 Günlük */
-
-.day-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 18px;
-    padding: 15px 5px;
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
+.search-bar input {
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: none;
+    outline: none;
 }
 
-.day-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #00f2fe;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-    transform: translateY(-5px);
-}
-
-
-/* --- MODAL (HAKKIMDA) - SADE VE ŞIK --- */
-
-.modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(15px);
-    z-index: 1000;
-}
-
-.modal-content {
-    background: rgba(25, 25, 30, 0.95);
-    margin: 10% auto;
-    padding: 40px;
-    width: 90%;
-    max-width: 450px;
-    border-radius: 30px;
-    border: 1px solid rgba(79, 172, 254, 0.2);
-    text-align: center;
-    box-shadow: 0 0 50px rgba(79, 172, 254, 0.15);
-    animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.profile-glow {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    color: #4facfe;
-    border: 2px solid rgba(79, 172, 254, 0.3);
-    box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
-}
-
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #666;
-    transition: 0.3s;
-}
-
-.close-modal:hover {
+.search-bar button {
+    width: 50px;
+    border-radius: 16px;
+    border: none;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #fff;
-    transform: rotate(90deg);
+    cursor: pointer;
 }
 
-.tech-badge {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #aaa;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin: 3px;
+
+/* =========================
+   WEATHER CARD
+========================= */
+
+.card {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 30px 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
-.tech-badge i {
-    color: #4facfe;
+.weather-main {
+    text-align: center;
 }
 
-#hataMesaji {
-    color: #ff6b6b;
-    background: rgba(255, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
+.weather-main img {
+    width: 90px;
 }
+
+.weather-main h2 {
+    font-size: 46px;
+    margin: 10px 0;
+}
+
+.weather-main h3 {
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+.weather-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-    position: fixed;
-    bottom: 10px;
     width: 100%;
     text-align: center;
     color: rgba(255, 255, 255, 0.3);
     font-size: 12px;
     pointer-events: none;
+    margin-top: 30px;
+    padding-bottom: 10px;
 }
 
 
-/* MOBİL */
-
-@media (max-width: 900px) {
-    body {
-        height: auto;
-        overflow-y: auto;
-        padding-bottom: 40px;
-    }
-    .container {
-        flex-direction: column;
-        padding: 30px 20px;
-        gap: 30px;
-    }
-    .card {
-        width: 100%;
-    }
-    .content-left {
-        text-align: center;
-    }
-    .tags {
-        justify-content: center;
-    }
-    .navbar {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-    }
-    .system-info {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-
-/* =====================
-   MOBILE FIX (≤768px)
-===================== */
+/* =========================
+   MOBILE FIX
+========================= */
 
 @media (max-width: 768px) {
     body {
-        padding: 12px;
+        min-height: 100dvh;
+        background-attachment: scroll;
     }
-    /* Ana kartlar */
-    .card,
-    .weather-card,
-    .air-quality {
-        width: 100%;
-        border-radius: 16px;
-        padding: 14px;
+    header {
+        padding: 14px 18px;
     }
-    /* Saatlik tahmin */
-    .hourly-forecast {
-        display: flex;
-        gap: 10px;
-        overflow-x: auto;
-        padding-bottom: 10px;
+    nav ul {
+        gap: 14px;
     }
-    .hour {
-        min-width: 90px;
-        padding: 10px;
-        font-size: 13px;
-    }
-    /* Grafik */
-    canvas {
-        max-height: 180px !important;
-    }
-    /* Başlıklar */
-    h1,
-    h2 {
-        font-size: 18px;
-    }
-    h3 {
-        font-size: 15px;
-    }
-    /* Footer */
-    footer {
-        font-size: 12px;
-        padding: 12px 0;
-    }
-}
-
-
-/* =============================
-   SKYCAST – MOBİL DÜZELTME CSS
-   Bu dosyayı main.css / globals.css altına EKLE
-   ============================= */
-
-
-/* GENEL BODY FIX */
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-
-/* MOBİL GENEL AYARLAR */
-
-@media (max-width: 900px) {
-    body {
-        height: auto !important;
-        overflow-y: auto !important;
-        background-attachment: scroll !important;
-    }
-    body::before {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-    }
-}
-
-
-/* NAVBAR */
-
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 32px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-@media (max-width: 900px) {
-    .navbar {
-        padding: 12px 18px;
-        background: rgba(0, 0, 0, 0.55);
-        backdrop-filter: blur(10px);
-    }
-    .logo {
-        font-size: 22px;
-    }
-    .nav-links {
-        gap: 18px;
-    }
-}
-
-
-/* ANA CONTAINER */
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 40px;
-}
-
-@media (max-width: 900px) {
     .container {
         flex-direction: column;
+        align-items: stretch;
         justify-content: flex-start;
-        padding: 24px 16px;
+        padding: 20px 14px;
+        gap: 24px;
     }
-}
-
-
-/* HERO ALANI */
-
-.content-left {
-    max-width: 650px;
-}
-
-.content-left h1 {
-    font-size: 72px;
-    line-height: 1.1;
-}
-
-.content-left p {
-    font-size: 18px;
-    margin-top: 16px;
-}
-
-@media (max-width: 900px) {
     .content-left {
         text-align: center;
     }
     .content-left h1 {
         font-size: 38px;
-        line-height: 1.2;
-        margin-bottom: 14px;
     }
-    .content-left p {
-        font-size: 15px;
-        max-width: 100%;
-    }
-}
-
-
-/* ŞEHİR BUTONLARI */
-
-.city-buttons {
-    display: flex;
-    gap: 14px;
-    margin-top: 28px;
-}
-
-@media (max-width: 900px) {
-    .city-buttons {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-}
-
-
-/* ARAMA KUTUSU */
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 40px;
-}
-
-@media (max-width: 900px) {
-    .search-box {
+    .card {
         width: 100%;
-        margin-top: 26px;
+        animation: none;
+        margin-bottom: 20px;
     }
-    .search-box input {
-        flex: 1;
-        font-size: 15px;
-    }
-}
-
-
-/* HAVA DURUMU KARTI */
-
-.weather-card {
-    margin-top: 40px;
-    padding: 28px;
-    border-radius: 20px;
-}
-
-@media (max-width: 900px) {
-    .weather-card {
-        width: 100%;
-        margin-top: 24px;
-        padding: 22px;
-    }
-}
-
-
-/* SICAKLIK */
-
-.temperature {
-    font-size: 64px;
-}
-
-@media (max-width: 900px) {
-    .temperature {
-        font-size: 42px;
-    }
-}
-
-
-/* FOOTER */
-
-footer {
-    text-align: center;
-    padding: 20px 0;
-}
-
-@media (max-width: 900px) {
     footer {
         position: relative;
-        margin-top: 24px;
+        bottom: auto;
+        margin-top: 20px;
     }
 }
