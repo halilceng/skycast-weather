@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SkyCast</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" type="image/x-icon">
 
@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-        /* --- CSS BAŞLANGICI (MASAÜSTÜ AYARLARI - DOKUNULMADI) --- */
+        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL) --- */
         
         * {
             margin: 0;
@@ -24,6 +24,7 @@
             box-sizing: border-box;
             font-family: 'Outfit', sans-serif;
         }
+        /* Scrollbar */
         
          ::-webkit-scrollbar {
             width: 6px;
@@ -832,69 +833,95 @@
                 opacity: 1;
             }
         }
-        /* --- 📱 MOBİL UYUMLULUK DÜZELTMESİ --- */
+        /* --- 📱 GÜÇLENDİRİLMİŞ MOBİL ENTEGRASYON (BURASI GÜNCELLENDİ) --- */
         
         @media only screen and (max-width: 900px) {
+            /* Gövde: Scroll serbest bırakılsın */
             body {
-                height: auto;
-                min-height: 100vh;
-                overflow-y: auto;
-                /* Kaydırmayı aç */
-                padding-bottom: 80px;
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                padding-bottom: 80px !important;
+                display: block !important;
+                /* Flex'i kaldırıp blok yapıyoruz */
             }
+            /* Container: Alt alta dizilsin */
             .container {
-                flex-direction: column;
-                padding: 20px;
-                gap: 20px;
-                margin-top: 10px;
-                justify-content: flex-start;
+                display: flex !important;
+                flex-direction: column !important;
+                /* Alt alta zorla */
+                padding: 10px 20px !important;
+                gap: 20px !important;
+                margin-top: 10px !important;
+                width: 100% !important;
+                height: auto !important;
+                justify-content: flex-start !important;
             }
+            /* Navbar: Dikey hizala */
             .navbar {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 20px;
-                background: rgba(0, 0, 0, 0.85);
-                /* Navbar daha belirgin olsun */
+                flex-direction: column !important;
+                gap: 15px !important;
+                padding: 15px !important;
+                background: rgba(0, 0, 0, 0.8) !important;
+                position: relative !important;
+                /* Sticky yerine relative olsun mobilde */
             }
             .nav-links {
-                display: none;
+                display: none !important;
             }
+            /* Sol İçerik: Yazıları küçült ve ortala */
             .content-left {
-                text-align: center;
-                width: 100%;
-                margin-bottom: 20px;
+                text-align: center !important;
+                width: 100% !important;
+                margin-bottom: 10px !important;
             }
             .content-left h1 {
-                font-size: 40px;
-                margin-bottom: 10px;
+                font-size: 40px !important;
+                /* Çok daha küçük */
+                margin-bottom: 10px !important;
             }
             .content-left p {
-                font-size: 16px;
-                margin-bottom: 20px;
+                font-size: 15px !important;
+                margin-bottom: 15px !important;
             }
             .tags {
-                justify-content: center;
+                justify-content: center !important;
             }
-            /* --- KART DÜZELTMESİ (TAŞMAYI ÖNLER) --- */
+            /* --- KART DÜZELTMESİ (KRİTİK NOKTA) --- */
+            .content-right {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+            }
             .card {
-                width: 95% !important;
-                /* Genişliği %95 yap */
-                max-width: 400px;
-                /* Maksimum genişlik sınırı */
-                margin: 0 auto;
-                /* Ortala */
-                padding: 20px;
-                box-sizing: border-box;
-                /* Padding dahil genişlik hesapla */
+                width: 100% !important;
+                /* Genişliği %100 yap */
+                max-width: 100% !important;
+                /* Sınırı kaldır */
+                min-width: 0 !important;
+                /* Minimum genişliği sıfırla */
+                margin: 0 !important;
+                padding: 20px !important;
+                border-radius: 20px !important;
+                box-sizing: border-box !important;
+                max-height: none !important;
+                /* Yükseklik sınırını kaldır */
+                overflow: visible !important;
+                /* İç kaydırmayı kapat */
             }
-            /* Footer Ortala */
+            /* Footer: Ortala */
             footer {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%;
-                bottom: 20px;
-                justify-content: center;
-                white-space: nowrap;
+                position: fixed !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 90% !important;
+                bottom: 10px !important;
+                justify-content: center !important;
+                white-space: nowrap !important;
+            }
+            footer:hover {
+                transform: translateX(-50%) translateY(-3px) !important;
             }
         }
     </style>
