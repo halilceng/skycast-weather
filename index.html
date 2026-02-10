@@ -1259,6 +1259,20 @@
         // 🌟 HAFIZADAN ŞEHİR ÇEKME 🌟
         const savedCity = localStorage.getItem('lastCity');
         checkWeather(savedCity || "Istanbul");
+
+        /* --- ZOMBİ TEMİZLEYİCİ (CACHE KILLER) - ARTIK DOĞRU YERDE --- */
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                    console.log("Eski Service Worker silindi.");
+                }
+            });
+            // Önbelleği zorla temizle
+            caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+            });
+        }
     </script>
 </body>
 
