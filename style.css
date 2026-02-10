@@ -718,3 +718,193 @@ footer {
         padding: 12px 0;
     }
 }
+
+
+/* =============================
+   SKYCAST – MOBİL DÜZELTME CSS
+   Bu dosyayı main.css / globals.css altına EKLE
+   ============================= */
+
+
+/* GENEL BODY FIX */
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* MOBİL GENEL AYARLAR */
+
+@media (max-width: 900px) {
+    body {
+        height: auto !important;
+        overflow-y: auto !important;
+        background-attachment: scroll !important;
+    }
+    body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+    }
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+@media (max-width: 900px) {
+    .navbar {
+        padding: 12px 18px;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(10px);
+    }
+    .logo {
+        font-size: 22px;
+    }
+    .nav-links {
+        gap: 18px;
+    }
+}
+
+
+/* ANA CONTAINER */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 24px 16px;
+    }
+}
+
+
+/* HERO ALANI */
+
+.content-left {
+    max-width: 650px;
+}
+
+.content-left h1 {
+    font-size: 72px;
+    line-height: 1.1;
+}
+
+.content-left p {
+    font-size: 18px;
+    margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+    .content-left {
+        text-align: center;
+    }
+    .content-left h1 {
+        font-size: 38px;
+        line-height: 1.2;
+        margin-bottom: 14px;
+    }
+    .content-left p {
+        font-size: 15px;
+        max-width: 100%;
+    }
+}
+
+
+/* ŞEHİR BUTONLARI */
+
+.city-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+@media (max-width: 900px) {
+    .city-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+
+/* ARAMA KUTUSU */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+    .search-box {
+        width: 100%;
+        margin-top: 26px;
+    }
+    .search-box input {
+        flex: 1;
+        font-size: 15px;
+    }
+}
+
+
+/* HAVA DURUMU KARTI */
+
+.weather-card {
+    margin-top: 40px;
+    padding: 28px;
+    border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+    .weather-card {
+        width: 100%;
+        margin-top: 24px;
+        padding: 22px;
+    }
+}
+
+
+/* SICAKLIK */
+
+.temperature {
+    font-size: 64px;
+}
+
+@media (max-width: 900px) {
+    .temperature {
+        font-size: 42px;
+    }
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+}
+
+@media (max-width: 900px) {
+    footer {
+        position: relative;
+        margin-top: 24px;
+    }
+}
