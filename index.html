@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SkyCast</title>
+    <title>SkyCast | Mobile V30</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" type="image/x-icon">
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL - AYNI KALDI) --- */
+        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL) --- */
         
         * {
             margin: 0;
@@ -832,74 +832,78 @@
                 opacity: 1;
             }
         }
-        /* --- 📱 GÜÇLENDİRİLMİŞ MOBİL ENTEGRASYON (FİNAL) --- */
+        /* --- 📱 MOBİL İÇİN KESİN ÇÖZÜM (BURASI KOMPLE YENİLENDİ) --- */
         
         @media only screen and (max-width: 900px) {
-            /* GÖVDE: Scroll'u kesin olarak serbest bırak */
+            /* GÖVDE: Yükseklik sınırını kaldır, Kaydırmayı aç */
             body {
                 height: auto !important;
-                /* Yüksekliği içeriğe göre ayarla */
                 min-height: 100vh !important;
                 overflow-y: auto !important;
-                /* Kaydırmayı aç */
+                /* Kaydırma kesin açık */
                 display: block !important;
-                /* Dikey ortalamayı (flex'i) iptal et */
-                padding-bottom: 100px !important;
-                /* Footer için pay */
-                background-attachment: scroll !important;
-                /* Arka plan sorununu çöz */
+                /* Flex iptal */
+                padding-bottom: 80px !important;
             }
-            /* NAVBAR: Basit ve akışkan yap */
-            .navbar {
-                flex-direction: column !important;
-                position: relative !important;
-                /* Sabit değil, akışta */
-                background: rgba(0, 0, 0, 0.6) !important;
-                padding: 15px !important;
-            }
-            .nav-links {
-                display: none !important;
-            }
-            /* ANA TAŞIYICI: En tepeden başlat */
+            /* ANA DÜZEN: Alt alta sırala, Üstten boşluk bırak */
             .container {
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
-                /* ANAHTAR KOD: Tepeden başla */
+                /* Tepeden başla */
                 align-items: center !important;
-                margin-top: 0 !important;
-                padding: 20px 15px !important;
+                padding: 10px 20px !important;
+                margin-top: 20px !important;
+                /* Üstten boşluk */
                 height: auto !important;
+                gap: 20px !important;
             }
-            /* SOL İÇERİK (METİN) */
+            /* NAVBAR: Dikey diz */
+            .navbar {
+                flex-direction: column !important;
+                padding: 15px !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+                position: relative !important;
+                /* Ekrana yapışmasın */
+            }
+            .nav-links {
+                display: none !important;
+            }
+            /* SOL KISIM (BAŞLIK): Boyutları küçült */
             .content-left {
                 text-align: center !important;
                 width: 100% !important;
-                margin-bottom: 30px !important;
+                margin-top: 10px !important;
             }
             .content-left h1 {
-                font-size: 42px !important;
+                font-size: 36px !important;
+                /* Yazıyı İyice Küçülttük */
                 line-height: 1.2 !important;
+                margin-bottom: 10px !important;
             }
-            /* SAĞ İÇERİK (KART) */
-            .content-right {
-                width: 100% !important;
-                display: flex !important;
+            .content-left p {
+                font-size: 14px !important;
+            }
+            .tags {
                 justify-content: center !important;
             }
+            /* KART: Ekrana Sığdır */
             .card {
                 width: 100% !important;
                 max-width: 400px !important;
-                /* Telefondan geniş olmasın */
-                margin: 0 !important;
+                margin: 0 auto !important;
+                padding: 20px !important;
                 max-height: none !important;
             }
-            /* FOOTER */
+            /* FOOTER: Sabitle */
             footer {
-                width: 80% !important;
-                bottom: 20px !important;
-                font-size: 11px !important;
-                padding: 8px 15px !important;
+                position: fixed !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                bottom: 10px !important;
+                width: 90% !important;
+                justify-content: center !important;
+                background: rgba(0, 0, 0, 0.9) !important;
             }
         }
     </style>
