@@ -3,55 +3,1258 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyCast</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SkyCast | Mobile & Desktop</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4facfe">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <style>
+        /* --- CSS BAŞLANGICI (MASAÜSTÜ İÇİN ORİJİNAL KODLAR) --- */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Scrollbar */
+        
+         ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+        
+        body {
+            background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #fff;
+            overflow: hidden;
+            transition: background-image 0.8s ease-in-out;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            position: fixed;
+        }
+        
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #00f2fe;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            box-shadow: 0 0 20px #00f2fe;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+            transition: 0.4s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 30px rgba(79, 172, 254, 1);
+        }
+        
+        .logo i {
+            color: #4facfe;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #ccc;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: #00f2fe;
+            transition: 0.3s;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #00f2fe;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .system-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .date-badge,
+        .clock {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #ddd;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .clock {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        .date-badge:hover,
+        .clock:hover {
+            background: rgba(79, 172, 254, 0.2);
+            border-color: #00f2fe;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            padding: 0 50px;
+            flex: 1;
+        }
+        
+        .content-left {
+            max-width: 550px;
+            animation: slideIn 1s ease;
+        }
+        
+        .content-left h1 {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .content-left h1 span {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 25px rgba(79, 172, 254, 0.4));
+        }
+        
+        .content-left p {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            max-width: 90%;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .tags button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .tags button i {
+            margin-right: 8px;
+            color: #4facfe;
+        }
+        
+        .tags button:hover {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.8), rgba(0, 242, 254, 0.8));
+            color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+            border-color: transparent;
+        }
+        
+        .card {
+            background: rgba(20, 20, 25, 0.65);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            padding: 30px;
+            border-radius: 30px;
+            width: 460px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+        
+        .card::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .search input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px 10px 0 0;
+            padding: 16px 20px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search input:focus {
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom-color: #4facfe;
+            letter-spacing: 1px;
+        }
+        
+        .search button {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .search button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: 0.5s;
+        }
+        
+        .search button:hover::before {
+            left: 100%;
+        }
+        
+        .search button:hover {
+            background: #4facfe;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .location-btn {
+            background: linear-gradient(135deg, #ff4757, #ff6b81) !important;
+            border: none !important;
+        }
+        
+        .location-btn:hover {
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4) !important;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .weather {
+            text-align: center;
+        }
+        
+        .icon-container {
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+        }
+        
+        .weather-icon {
+            font-size: 90px;
+            color: #fff;
+        }
+        
+        .weather h1 {
+            font-size: 55px;
+            font-weight: 700;
+            margin: 10px 0;
+            letter-spacing: -2px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            margin: 25px 0;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .detail-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+        
+        .detail-box:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .detail-box i {
+            font-size: 22px;
+            color: #4facfe;
+        }
+        
+        .degeryazi {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .aqi-iyi {
+            border-left: 4px solid #00e676;
+        }
+        
+        .aqi-orta {
+            border-left: 4px solid #ffeb3b;
+        }
+        
+        .aqi-hassas {
+            border-left: 4px solid #ff9800;
+        }
+        
+        .aqi-kotu {
+            border-left: 4px solid #f44336;
+        }
+        
+        .aqi-tehlikeli {
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .hourly-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 5px;
+            margin-bottom: 20px;
+        }
+        
+        .hourly-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .hourly-card {
+            min-width: 75px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 12px 5px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+        
+        .hourly-card:hover {
+            background: #4facfe;
+            border-color: #4facfe;
+            transform: scale(1.05);
+        }
+        
+        .hourly-time {
+            font-size: 12px;
+            color: #ccc;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .hourly-card:hover .hourly-time,
+        .hourly-card:hover .hourly-temp {
+            color: #fff;
+        }
+        
+        .hourly-icon {
+            width: 35px;
+            height: 35px;
+            margin: 5px 0;
+        }
+        
+        .hourly-temp {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .chart-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+        }
+        
+        .forecast-title {
+            font-size: 16px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .daily-forecast {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .day-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            padding: 15px 5px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+        
+        .day-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .day-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .day-icon {
+            width: 45px;
+            margin-bottom: 8px;
+        }
+        
+        .day-temp {
+            font-size: 16px;
+            font-weight: 800;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            position: relative;
+            background: rgba(30, 30, 40, 0.9);
+            margin: 10% auto;
+            padding: 45px 40px;
+            width: 90%;
+            max-width: 480px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.05);
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .profile-glow {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            color: #fff;
+        }
+        
+        .profile-glow::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #4facfe, #00f2fe, #7a00ff, #4facfe);
+            animation: rotateBorder 4s linear infinite;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+        
+        .profile-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #1a1a1a;
+            z-index: -1;
+        }
+        
+        @keyframes rotateBorder {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .dev-title span {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+        
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #ccc;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .tech-badge i {
+            color: #4facfe;
+        }
+        
+        .tech-badge:hover {
+            background: rgba(79, 172, 254, 0.15);
+            border-color: #4facfe;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .modal-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 22px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: 0.5s;
+        }
+        
+        .social-btn:hover::before {
+            left: 100%;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .linkedin:hover {
+            background: #0077b5;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(0, 119, 181, 0.4);
+        }
+        
+        .github:hover {
+            background: #333;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(51, 51, 51, 0.4);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            color: #666;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
+        
+        .close-modal:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+        
+        #hataMesaji {
+            color: #ff6b6b;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 25px;
+            left: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            z-index: 90;
+        }
+        
+        footer:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #4facfe;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer i {
+            color: #4facfe;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* --- 📱 TELEFON İÇİN GİZLİ AYARLAR (SADECE TELEFONDA DEVREYE GİRER) --- */
+        
+        @media only screen and (max-width: 900px) {
+            body {
+                height: auto;
+                min-height: 100vh;
+                overflow-y: auto;
+                /* Kaydırmayı aç */
+                padding-bottom: 80px;
+            }
+            /* Navbar Sıkışmasın */
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                background: rgba(0, 0, 0, 0.8);
+            }
+            .nav-links {
+                display: none;
+            }
+            /* Mobilde menüyü gizle */
+            /* İçeriği Alt Alta Diz */
+            .container {
+                flex-direction: column;
+                padding: 20px;
+                gap: 30px;
+                margin-top: 10px;
+            }
+            /* Yazıları Küçült ve Ortala */
+            .content-left {
+                text-align: center;
+                width: 100%;
+            }
+            .content-left h1 {
+                font-size: 42px;
+            }
+            .content-left p {
+                font-size: 16px;
+            }
+            .tags {
+                justify-content: center;
+            }
+            /* Kartı Ekrana Sığdır */
+            .card {
+                width: 100%;
+                max-width: 460px;
+                max-height: none;
+                /* İçerik taşarsa uzasın */
+                margin-bottom: 20px;
+            }
+            /* Footer'ı Ortala */
+            footer {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                justify-content: center;
+                bottom: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">SkyCast</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Forecast</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="loader-container" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-cloud-bolt"></i> SkyCast</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Ana Sayfa</a></li>
+            <li><a href="#" id="openAbout">Hakkımda</a></li>
+        </ul>
+        <div class="system-info">
+            <div class="date-badge"><i class="fa-regular fa-calendar-days"></i> <span id="canliTarih">...</span></div>
+            <div class="clock" id="canliSaat">00:00</div>
+        </div>
+    </nav>
 
     <main class="container">
-        <section class="content-left">
-            <h1>Havanı Öğren</h1>
-            <p>Bulunduğun şehrin anlık hava durumunu hızlıca öğren.</p>
-
-            <div class="search-bar">
-                <input type="text" placeholder="Şehir adı">
-                <button>🔍</button>
+        <div class="content-left">
+            <h1>Gökyüzünü <br><span>Yeniden Keşfet</span></h1>
+            <p>Anlık veriler, saatlik analizler ve yapay zeka destekli tahminlerle atmosferin ritmini yakala.</p>
+            <div class="tags">
+                <button onclick="sehirSec('Istanbul')"><i class="fa-solid fa-location-dot"></i> İstanbul</button>
+                <button onclick="sehirSec('Ankara')"><i class="fa-solid fa-location-dot"></i> Ankara</button>
+                <button onclick="sehirSec('Izmir')"><i class="fa-solid fa-location-dot"></i> İzmir</button>
+                <button onclick="sehirSec('Erzincan')"><i class="fa-solid fa-location-dot"></i> Erzincan</button>
             </div>
-        </section>
+        </div>
 
-        <section class="card">
-            <div class="weather-main">
-                <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="">
-                <h2>22°</h2>
-                <h3>İstanbul</h3>
-            </div>
+        <div class="content-right">
+            <div class="card">
+                <div class="search">
+                    <input type="text" id="sehirInput" placeholder="Şehir Ara...">
+                    <button id="araBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="konumBtn" class="location-btn"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
 
-            <div class="weather-info">
-                <div class="info-box">Nem %60</div>
-                <div class="info-box">Rüzgar 12 km/h</div>
-                <div class="info-box">Basınç 1015</div>
-                <div class="info-box">Hissedilen 21°</div>
+                <div class="weather" style="display: none;">
+                    <div class="icon-container fade-in-up"><i class="weather-icon fa-solid fa-cloud"></i></div>
+                    <h1 id="derece" class="fade-in-up delay-1">0°C</h1>
+                    <h2 id="sehirAdi" class="fade-in-up delay-1">Şehir</h2>
+                    <p id="durum" class="fade-in-up delay-1">Durum</p>
+                    <div class="divider fade-in-up delay-2"></div>
+
+                    <div class="details-grid fade-in-up delay-2">
+                        <div class="detail-box"><i class="fa-solid fa-droplet"></i>
+                            <div>
+                                <p class="degeryazi" id="nem">%0</p>
+                                <p>Nem</p>
+                            </div>
+                        </div>
+                        <div class="detail-box"><i class="fa-solid fa-wind"></i>
+                            <div>
+                                <p class="degeryazi" id="ruzgar">0 km/s</p>
+                                <p>Rüzgar</p>
+                            </div>
+                        </div>
+                        <div class="detail-box"><i class="fa-solid fa-temperature-half"></i>
+                            <div>
+                                <p class="degeryazi" id="hissedilen">0°C</p>
+                                <p>Hissedilen</p>
+                            </div>
+                        </div>
+                        <div class="detail-box" id="aqiKutu"><i class="fa-solid fa-lungs"></i>
+                            <div>
+                                <p class="degeryazi" id="aqiDurum">-</p>
+                                <p>Hava Kalitesi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="forecast-title fade-in-up delay-3" style="margin-top:25px; text-align:left;">Önümüzdeki Saatler</h3>
+                    <div class="hourly-container fade-in-up delay-3" id="saatlikTahmin"></div>
+
+                    <div class="chart-container fade-in-up delay-4">
+                        <canvas id="sicaklikGrafigi"></canvas>
+                    </div>
+
+                    <div class="divider fade-in-up delay-4"></div>
+
+                    <h3 class="forecast-title fade-in-up delay-4">5 Günlük Tahmin</h3>
+                    <div class="daily-forecast fade-in-up delay-4" id="gunlukTahmin"></div>
+                </div>
+
+                <div id="hataMesaji" style="display: none;">
+                    <i class="fa-solid fa-circle-exclamation"></i> Şehir bulunamadı!
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="profile-glow"><i class="fa-solid fa-code"></i></div>
+            <h2 class="dev-title">Merhaba, Ben <span>Halil Işık</span></h2>
+            <p style="color: #888; margin-bottom: 20px; font-size: 14px;">Computer Engineering Student 💻</p>
+            <p style="color: #ccc; line-height: 1.6; margin-bottom: 25px; font-size: 15px;">SkyCast, modern web teknolojileri ile geliştirilmiş, kullanıcı deneyimine odaklanan interaktif bir hava durumu uygulamasıdır.</p>
+            <div class="tech-stack">
+                <span class="tech-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
+                <span class="tech-badge"><i class="fa-solid fa-wind"></i> OpenWeather</span>
+                <span class="tech-badge"><i class="fa-solid fa-palette"></i> Glassmorphism</span>
+            </div>
+            <div class="modal-socials">
+                <a href="https://linkedin.com" target="_blank" class="social-btn linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn github"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        © 2026 SkyCast
+        <i class="fa-solid fa-laptop-code"></i>
+        <span>Designed & Developed by <b style="color: #fff;">Halil Işık</b> | © 2026</span>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        /* --- JAVASCRIPT --- */
+        const apiKey = "1a4ab5ff7872d2e3a7df6ed2e654039d"; // API Key
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+        const forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
+        const aqiUrl = "https://api.openweathermap.org/data/2.5/air_pollution";
+
+        const searchBox = document.querySelector("#sehirInput");
+        const searchBtn = document.querySelector("#araBtn");
+        const locationBtn = document.querySelector("#konumBtn");
+        const weatherIcon = document.querySelector(".weather-icon");
+        const errorMsg = document.querySelector("#hataMesaji");
+        const loader = document.querySelector("#loader");
+
+        // DİNAMİK ARKA PLANLAR
+        const backgrounds = {
+            Clear: "url('https://images.unsplash.com/photo-1601297183305-6df142704ea2?q=80')",
+            Clouds: "url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80')",
+            Rain: "url('https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80')",
+            Drizzle: "url('https://images.unsplash.com/photo-1556485689-33e55ab56ce0?q=80')",
+            Thunderstorm: "url('https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?q=80')",
+            Snow: "url('https://images.unsplash.com/photo-1477601263568-180e2c6d046e?q=80')",
+            Mist: "url('https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80')",
+            Default: "url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80')"
+        };
+
+        async function checkWeather(city) {
+            loader.style.display = "flex";
+            try {
+                const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric&lang=tr`);
+                if (!response.ok) throw new Error("Şehir bulunamadı");
+                const data = await response.json();
+
+                // 🌟 BAŞARILI OLUNCA ŞEHRİ HAFIZAYA ALIYORUZ 🌟
+                localStorage.setItem('lastCity', city);
+
+                document.body.style.backgroundImage = backgrounds[data.weather[0].main] || backgrounds.Default;
+
+                document.querySelector("#sehirAdi").innerHTML = data.name;
+                document.querySelector("#derece").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector("#nem").innerHTML = "%" + data.main.humidity;
+                document.querySelector("#ruzgar").innerHTML = data.wind.speed + " km/s";
+                document.querySelector("#hissedilen").innerHTML = Math.round(data.main.feels_like) + "°C";
+                document.querySelector("#durum").innerHTML = data.weather[0].description.toUpperCase();
+
+                const iconCode = data.weather[0].icon;
+                weatherIcon.className = `weather-icon fa-solid ${getWeatherIcon(iconCode)}`;
+
+                document.querySelector(".weather").style.display = "block";
+                errorMsg.style.display = "none";
+                getAirQuality(data.coord.lat, data.coord.lon);
+                getForecast(city);
+            } catch (error) {
+                document.querySelector(".weather").style.display = "none";
+                errorMsg.style.display = "block";
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        async function getForecast(city) {
+            const gunlukTahminDiv = document.getElementById('gunlukTahmin');
+            const saatlikTahminDiv = document.getElementById('saatlikTahmin');
+            gunlukTahminDiv.innerHTML = '';
+            saatlikTahminDiv.innerHTML = '';
+
+            try {
+                const response = await fetch(`${forecastUrl}?q=${city}&appid=${apiKey}&units=metric&lang=tr`);
+                const data = await response.json();
+
+                const next24Hours = data.list.slice(0, 8);
+                next24Hours.forEach(item => {
+                    const time = new Date(item.dt * 1000).toLocaleTimeString('tr-TR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const temp = Math.round(item.main.temp);
+                    const icon = item.weather[0].icon;
+                    saatlikTahminDiv.innerHTML += `
+                        <div class="hourly-card">
+                            <span class="hourly-time">${time}</span>
+                            <img src="https://openweathermap.org/img/wn/${icon}.png" class="hourly-icon">
+                            <span class="hourly-temp">${temp}°</span>
+                        </div>`;
+                });
+                updateChart(next24Hours);
+
+                const dailyData = data.list.filter(item => item.dt_txt.includes("12:00:00"));
+                dailyData.forEach(day => {
+                    const date = new Date(day.dt * 1000).toLocaleDateString('tr-TR', {
+                        weekday: 'short'
+                    });
+                    const temp = Math.round(day.main.temp);
+                    const icon = day.weather[0].icon;
+                    gunlukTahminDiv.innerHTML += `
+                        <div class="day-card">
+                            <p class="day-name">${date}</p>
+                            <img src="https://openweathermap.org/img/wn/${icon}.png" class="day-icon">
+                            <p class="day-temp">${temp}°C</p>
+                        </div>`;
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        let myChart;
+
+        function updateChart(hourlyData) {
+            const ctx = document.getElementById('sicaklikGrafigi').getContext('2d');
+            const labels = hourlyData.map(item => new Date(item.dt * 1000).getHours() + ":00");
+            const temps = hourlyData.map(item => Math.round(item.main.temp));
+            if (myChart) myChart.destroy();
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sıcaklık',
+                        data: temps,
+                        borderColor: '#4facfe',
+                        backgroundColor: 'rgba(79, 172, 254, 0.2)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fff',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false
+                        },
+                        y: {
+                            ticks: {
+                                color: '#ddd'
+                            },
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        async function getAirQuality(lat, lon) {
+            try {
+                const res = await fetch(`${aqiUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+                const data = await res.json();
+                const aqi = data.list[0].main.aqi;
+                const durumlar = ["İyi", "Orta", "Hassas", "Kötü", "Tehlikeli"];
+                const renkler = ["aqi-iyi", "aqi-orta", "aqi-hassas", "aqi-kotu", "aqi-tehlikeli"];
+                const aqiBox = document.getElementById('aqiKutu');
+                aqiBox.className = "detail-box fade-in-up delay-2 " + renkler[aqi - 1];
+                document.getElementById('aqiDurum').innerText = durumlar[aqi - 1];
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        function getWeatherIcon(code) {
+            if (code.startsWith("01")) return "fa-sun";
+            if (code.startsWith("02")) return "fa-cloud-sun";
+            if (code.startsWith("03") || code.startsWith("04")) return "fa-cloud";
+            if (code.startsWith("09") || code.startsWith("10")) return "fa-cloud-rain";
+            if (code.startsWith("11")) return "fa-cloud-bolt";
+            if (code.startsWith("13")) return "fa-snowflake";
+            if (code.startsWith("50")) return "fa-smog";
+            return "fa-cloud";
+        }
+
+        function sehirSec(sehir) {
+            document.getElementById('sehirInput').value = sehir;
+            checkWeather(sehir);
+        }
+        searchBtn.addEventListener("click", () => checkWeather(searchBox.value));
+        searchBox.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") checkWeather(searchBox.value);
+        });
+
+        // --- 📍 KONUM ALMA (GPS) ---
+        locationBtn.addEventListener("click", () => {
+            if (navigator.geolocation) {
+                loader.style.display = "flex";
+                navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            } else {
+                alert("Tarayıcınız konum özelliğini desteklemiyor.");
+            }
+        });
+
+        function onSuccess(position) {
+            const {
+                latitude,
+                longitude
+            } = position.coords;
+            fetch(`${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=tr`)
+                .then(response => response.json())
+                .then(data => {
+                    checkWeather(data.name);
+                })
+                .catch(() => {
+                    loader.style.display = "none";
+                    alert("Konum verisi alınamadı.");
+                });
+        }
+
+        function onError(error) {
+            loader.style.display = "none";
+            alert("Konum izni reddedildi veya alınamadı.");
+        }
+
+        // Modal
+        const modal = document.getElementById("modalOverlay");
+        document.getElementById("openAbout").onclick = () => modal.style.display = "block";
+        document.getElementsByClassName("close-modal")[0].onclick = () => modal.style.display = "none";
+        window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = "none";
+        }
+
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('canliSaat').innerText = now.toLocaleTimeString('tr-TR');
+            document.getElementById('canliTarih').innerText = now.toLocaleDateString('tr-TR', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }, 1000);
+
+        // 🌟 HAFIZADAN ŞEHİR ÇEKME 🌟
+        const savedCity = localStorage.getItem('lastCity');
+        checkWeather(savedCity || "Istanbul");
+    </script>
 </body>
 
 </html>
