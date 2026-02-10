@@ -4,19 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SkyCast | Mobile V30</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" type="image/x-icon">
+    <title>SkyCast</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4facfe">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SkyCast">
+
+    <link rel="icon" type="image/png" href="icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+    <link rel="shortcut icon" href="icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+
+    <link rel="manifest" href="manifest.json">
 
     <style>
-        /* --- MASAÜSTÜ AYARLARI (ORİJİNAL) --- */
+        /* --- MASAÜSTÜ AYARLARI --- */
         
         * {
             margin: 0;
@@ -832,44 +838,35 @@
                 opacity: 1;
             }
         }
-        /* --- 📱 MOBİL İÇİN KESİN ÇÖZÜM (BURASI KOMPLE YENİLENDİ) --- */
+        /* --- 📱 MOBİL İÇİN KESİN ÇÖZÜM --- */
         
         @media only screen and (max-width: 900px) {
-            /* GÖVDE: Yükseklik sınırını kaldır, Kaydırmayı aç */
             body {
                 height: auto !important;
                 min-height: 100vh !important;
                 overflow-y: auto !important;
-                /* Kaydırma kesin açık */
                 display: block !important;
-                /* Flex iptal */
                 padding-bottom: 80px !important;
             }
-            /* ANA DÜZEN: Alt alta sırala, Üstten boşluk bırak */
             .container {
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
-                /* Tepeden başla */
                 align-items: center !important;
                 padding: 10px 20px !important;
                 margin-top: 20px !important;
-                /* Üstten boşluk */
                 height: auto !important;
                 gap: 20px !important;
             }
-            /* NAVBAR: Dikey diz */
             .navbar {
                 flex-direction: column !important;
                 padding: 15px !important;
                 background: rgba(0, 0, 0, 0.85) !important;
                 position: relative !important;
-                /* Ekrana yapışmasın */
             }
             .nav-links {
                 display: none !important;
             }
-            /* SOL KISIM (BAŞLIK): Boyutları küçült */
             .content-left {
                 text-align: center !important;
                 width: 100% !important;
@@ -877,7 +874,6 @@
             }
             .content-left h1 {
                 font-size: 36px !important;
-                /* Yazıyı İyice Küçülttük */
                 line-height: 1.2 !important;
                 margin-bottom: 10px !important;
             }
@@ -887,7 +883,6 @@
             .tags {
                 justify-content: center !important;
             }
-            /* KART: Ekrana Sığdır */
             .card {
                 width: 100% !important;
                 max-width: 400px !important;
@@ -895,7 +890,6 @@
                 padding: 20px !important;
                 max-height: none !important;
             }
-            /* FOOTER: Sabitle */
             footer {
                 position: fixed !important;
                 left: 50% !important;
@@ -1059,7 +1053,6 @@
                 if (!response.ok) throw new Error("Şehir bulunamadı");
                 const data = await response.json();
 
-                // 🌟 BAŞARILI OLUNCA ŞEHRİ HAFIZAYA ALIYORUZ 🌟
                 localStorage.setItem('lastCity', city);
 
                 document.body.style.backgroundImage = backgrounds[data.weather[0].main] || backgrounds.Default;
