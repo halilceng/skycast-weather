@@ -7,18 +7,19 @@ SkyCast, modern web teknolojileri ve **Glassmorphism** tasarım dili kullanılar
 [![Proje Önizlemesi](https://images.unsplash.com/photo-1592210454359-9043f53db363?q=80&w=1200)](https://skycast-weather-seven.vercel.app/)
 ## 🚀 Özellikler
 
-* **Anlık Veri:** OpenWeatherMap API ile global hava durumu takibi.
+* **Anlık Veri:** **Open-Meteo API** ile en güncel ve global hava durumu verileri.
 * **Akıllı Hafıza:** Tarayıcı (LocalStorage) desteği ile son aranan şehri hatırlar.
-* **PWA Desteği:** Mobil cihazlara uygulama olarak kurulabilir.
-* **Dinamik UI:** Hava durumuna göre değişen arka planlar (Yağmurlu, Karlı, Güneşli vb.).
-* **Interaktif Grafikler:** Chart.js ile 24 saatlik sıcaklık analizi.
+* **PWA Desteği:** Mobil cihazlara uygulama olarak kurulabilir (Installable).
+* **Dinamik UI:** Hava durumuna ve günün saatine göre değişen arka planlar.
+* **İnteraktif Grafikler:** Chart.js ile 24 saatlik sıcaklık analizi.
 * **Hava Kalitesi:** Bölgesel AQI (Hava Kalitesi İndeksi) ölçümü.
-
+* **Konum Desteği:** Tek tıkla bulunduğunuz konumun (Reverse Geocoding) hava durumu.
+* 
 ## 🛠️ Kullanılan Teknolojiler
 
 * **Frontend:** HTML5, CSS3 (Animations, Glassmorphism), JavaScript (ES6+)
 * **Libraries:** Chart.js (Veri Görselleştirme)
-* **API:** OpenWeatherMap REST API
+* **API:** Open-Meteo (Free Weather API) & BigDataCloud (Reverse Geocoding)
 * **Deployment:** Vercel
 
 ## 👨‍💻 Geliştirici
