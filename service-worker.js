@@ -1,4 +1,4 @@
-const CACHE_NAME = 'skycast-v39'; // Güncelleme yaptıkça buradaki sayıyı arttır (v39, v40...)
+const CACHE_NAME = 'skycast-v40'; // Güncelleme yaptıkça buradaki sayıyı arttır (v39, v40...)
 const urlsToCache = [
     '/',
     '/index.html',

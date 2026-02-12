@@ -2,6 +2,25 @@
 <html lang="tr">
 
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XJDGCK5GMF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XJDGCK5GMF');
+
+        // PWA YÜKLEME TAKİBİ (Kaç kişi ana ekrana ekledi?)
+        window.addEventListener('appinstalled', () => {
+            gtag('event', 'pwa_install', {
+                'event_category': 'PWA',
+                'event_label': 'SkyCast Yüklendi'
+            });
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SkyCast</title>
